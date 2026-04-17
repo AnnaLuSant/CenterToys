@@ -97,4 +97,48 @@ public class DAO {
 		
 	}
 	
+	//Seleção de produto para editar
+	public void selecionarProduto(JavaBeans produto) {
+		String read2 = "select * from brinquedos where idcon = ?";
+				try {
+					Connection con = conectar();
+					PreparedStatement pst = con.prepareStatement(read2);
+					pst.setString(1, produto.getIdcon());
+					ResultSet rs = pst.executeQuery();
+				
+					while (rs.next()) {
+						produto.setIdcon(rs.getString(1));
+						produto.setNome(rs.getString(2));
+						produto.setFabricacao(rs.getString(3));
+						produto.setCategoria(rs.getString(4));
+						produto.setFaixaE(rs.getString(5));
+						produto.setPreco(rs.getString(6));
+					}
+					con.close();
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+	}
+	
+	//Editar contato
+		public void alterarContato(JavaBeans produto) {
+			String create = "update contatos set nome =?, fone=?, email=? where idcon=?";
+			try {
+				Connection con = conectar();
+				PreparedStatement pst = con.prepareStatement(create);				
+				pst.setString(1, produto.getNome());
+				pst.setString(2, produto.getFabricacao());
+				pst.setString(3, produto.getCategoria());
+				pst.setString(4, produto.getFaixaE());
+				pst.setString(5, produto.getPreco());
+				pst.setString(6, produto.getIdcon());
+				pst.executeUpdate();
+				con.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+					
+		}	
+
+	
 }

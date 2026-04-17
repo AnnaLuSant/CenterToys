@@ -15,7 +15,7 @@ import model.JavaBeans;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet({"/main","/insert"})
+@WebServlet({"/main","/insert","/select","/update"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();//Teste com o Banco
@@ -41,6 +41,10 @@ public class Controller extends HttpServlet {
 			produtos(request,response);
 		}else if(action.equals("/insert")){
 			inserirProduto(request,response);
+		}else if (action.equals("/select")) {
+			listarContato(request,response);
+		}else if(action.equals("/update")){
+			editarProduto(request,response);
 		}else {
 			response.sendRedirect("index.html");
 		}
@@ -92,6 +96,45 @@ public class Controller extends HttpServlet {
 	    // redirecionar
 	    response.sendRedirect("main");
 	}
+	
+	protected void listarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idcon = request.getParameter("idcon");
+		//System.out.println(idcon);
+		produto.setIdcon(idcon);
+		dao.selecionarProduto(produto);
+		/*System.out.println(contato.getIdcon());
+		System.out.println(contato.getNome());
+		System.out.println(contato.getFone());
+		System.out.println(contato.getEmail());*/
+		
+		request.setAttribute("idcon", produto.getIdcon());
+		request.setAttribute("nome", produto.getNome());
+		request.setAttribute("fab", produto.getFabricacao());
+		request.setAttribute("categoria", produto.getCategoria());
+		request.setAttribute("faixa", produto.getFaixaE());
+		request.setAttribute("preco", produto.getPreco());
+		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+		rd.forward(request, response);
+	}
+	
+	protected void editarProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*System.out.println(request.getParameter("idcon"));
+		System.out.println(request.getParameter("nome"));
+		System.out.println(request.getParameter("fone"));
+		System.out.println(request.getParameter("email"));*/
+		
+		produto.setNome(request.getParameter("nome"));
+	    produto.setFabricacao(request.getParameter("fab"));
+	    produto.setCategoria(request.getParameter("categoria"));
+	    produto.setFaixaE(request.getParameter("faixa"));
+	    produto.setPreco(request.getParameter("preco"));
+		
+		dao.alterarContato(produto);
+		response.sendRedirect("main");
+	}
+	
+	
+	
 	
 	
 
