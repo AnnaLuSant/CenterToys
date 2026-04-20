@@ -1,117 +1,160 @@
-@charset "UTF-8";
-
 :root {
-	--amareloClaro: #f9f6e5;
-	--azure: #207bb8;
-	--amarelo: #facf23;
-	--preto: #000000;
-	--branco: #ffffff;
-	--verde: #00bf63;
-	--vermelho: #e4392e;
+
+    --amareloClaro: #f9f6e5;
+    --azure: #207bb8;
+    --amarelo: #facf23;
+    --preto: #000000;
+    --branco: #ffffff;
+    --verde: #00bf63;
+    --vermelho: #e4392e;
+
 }
 
 #interface {
-	background-color: var(--amareloClaro);
-	font-family: "Fredoka", sans-serif;
+
+    background-color: var(--amareloClaro);
+    font-family: "Fredoka", sans-serif;
+
 }
 
 #logo {
-	max-width: 300px;
-	/* Limita o tamanho da logo em telas grandes, mas mantém responsivo */
-	height: auto;
+
+    max-width: 300px; /* Limita o tamanho da logo em telas grandes, mas mantém responsivo */
+    height: auto;
+
 }
 
 .titulo-pagina {
-	color: var(--azure);
+
+    color: var(--azure);
+    font-family: "Fredoka";
+
 }
 
-.txt-index {
-	color: var(--vermelho);
+.txt-index{
+
+    color: var(--vermelho);
+
 }
 
 /* Estilo do container da tabela para destacar do fundo */
 .border-tabela {
-	border: 2px solid var(--amarelo);
+
+    border: 2px solid var(--amarelo);
+
 }
 
 /* Força a fonte na tabela do Bootstrap */
 .table {
-	font-family: "Fredoka", sans-serif;
+
+    font-family: "Fredoka", sans-serif;
+
 }
 
 .table th {
-	color: var(--azure);
-	font-weight: 600;
+
+    color: var(--azure);
+    font-weight: 600;
+
 }
 
-@media ( max-width : 767px) {
-	#logo {
-		margin-bottom: 1rem;
-	}
+@media (max-width: 767px) {
+
+    #logo {
+
+        margin-bottom: 1rem;
+
+    }
+
 }
 
 /* Desktop: Logo e Título lado a lado perfeitamente alinhados */
-@media ( min-width : 768px) {
-	#logo {
-		max-width: 200px;
-		margin-bottom: 0;
-		margin-right: 200px;
-	}
-	#logo-index {
-		max-width: 200px;
-		margin-bottom: 0;
-	}
-	.titulo-pagina {
-		display: flex;
-		align-items: center;
-		line-height: 1;
-		font-size: 3.5rem;
-	}
-	.titulo-pagina-index {
-		color: var(--azure);
-		align-items: center;
-		line-height: 1;
-		font-size: 4rem;
-		margin-top: 20px;
-		text-align: center;
-	}
+@media (min-width: 768px) {
+
+    #logo {
+
+        max-width: 200px;
+        margin-bottom: 0;
+        margin-right: 200px;
+
+    }
+
+    #logo-index {
+
+        max-width: 200px;
+        margin-bottom: 0;
+
+    }
+    
+    .titulo-pagina {
+
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        font-size: 3.5rem;
+
+    }
+
+    .titulo-pagina-index {
+
+        color: var(--azure);
+        align-items: center;
+        line-height: 1;
+        font-size: 4rem;
+        margin-top: 20px;
+        text-align: center;
+
+    }
+
 }
 
 /* Efeito de hover suave para todos os botões */
 .btn {
-	transition: transform 0.2s ease, filter 0.2s ease;
+
+    transition: transform 0.2s ease, filter 0.2s ease;
+
 }
 
 .btn:hover {
-	transform: scale(1.03);
-	filter: brightness(0.95);
+
+    transform: scale(1.03);
+    filter: brightness(0.95);
+
 }
 
 /* Identificadores dos Botões */
 #botaoAzul {
-	background-color: var(--azure);
-	color: var(--branco);
-	font-size: 1rem;
-	border: none;
+
+    background-color: var(--azure);
+    color: var(--branco);
+    font-size: 1rem;
+    border: none;
+
 }
 
 #botaoAmarelo {
-	background-color: var(--amarelo);
-	color: var(--azure);
-	font-size: 0.9rem;
-	border: none;
+
+    background-color: var(--amarelo);
+    color: var(--azure);
+    font-size: 1rem;
+    border: none;
+
 }
 
 #botaoVermelho {
-	background-color: var(--vermelho);
-	color: var(--amarelo);
-	font-size: 0.9rem;
-	border: none;
+
+    background-color: var(--vermelho);
+    color: var(--amarelo);
+    font-size: 1rem;
+    border: none;
+
 }
 
 #botaoVerde {
-	background-color: var(--verde);
-	color: var(--amarelo);
-	font-size: 1rem;
-	border: none;
+
+    background-color: var(--verde);
+    color: var(--amarelo);
+    font-size: 1rem;
+    border: none;
+
 }
