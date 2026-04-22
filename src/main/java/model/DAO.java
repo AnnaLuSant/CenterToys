@@ -120,9 +120,9 @@ public class DAO {
 				}
 	}
 	
-	//Editar contato
+	//Editar produto
 		public void alterarContato(JavaBeans produto) {
-			String create = "update contatos set nome =?, fone=?, email=? where idcon=?";
+			String create = "update brinquedos set nome =?, fone=?, email=? where idcon=?";
 			try {
 				Connection con = conectar();
 				PreparedStatement pst = con.prepareStatement(create);				
@@ -138,7 +138,22 @@ public class DAO {
 				System.out.println(e);
 			}
 					
-		}	
+		}
+		
+	//Deletar produto
+		public void deletarProduto(JavaBeans contato) {
+			String delete = "delete from brinquedos where idcon =?";
+			try {
+				Connection con = conectar();
+				PreparedStatement pst = con.prepareStatement(delete);
+				pst.setString(1, contato.getIdcon());
+				pst.executeUpdate();
+				con.close();
+				
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 	
 }

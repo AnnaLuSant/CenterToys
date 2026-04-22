@@ -15,7 +15,7 @@ import model.JavaBeans;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet({"/main","/insert","/select","/update"})
+@WebServlet({"/main","/insert","/select","/update","/delete","report"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();//Teste com o Banco
@@ -45,7 +45,12 @@ public class Controller extends HttpServlet {
 			listarContato(request,response);
 		}else if(action.equals("/update")){
 			editarProduto(request,response);
-		}else {
+		}else if (action.equals("/delete")){
+			removerContato(request,response);
+		}else if (action.equals("/report")){
+			gerarRelatorio(request,response);
+		}
+		else {
 			response.sendRedirect("index.html");
 		}
 	}
@@ -130,6 +135,15 @@ public class Controller extends HttpServlet {
 	    produto.setPreco(request.getParameter("preco"));
 		
 		dao.alterarContato(produto);
+		response.sendRedirect("main");
+	}
+	
+	protected void removerContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idcon = request.getParameter("idcon");
+		//System.out.println(idcon);
+		
+		produto.setIdcon(idcon);
+		dao.deletarProduto(produto);
 		response.sendRedirect("main");
 	}
 	
