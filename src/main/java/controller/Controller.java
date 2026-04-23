@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
@@ -84,13 +86,18 @@ public class Controller extends HttpServlet {
 	    String faixaE = request.getParameter("faixa");
 	    String preco = request.getParameter("preco");
 	    
-	    //conversão
+	    //conversão categoria e data
 	    String categoriaEnum = String.valueOf(categoriaStr);
+	    
+	    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    LocalDate data = LocalDate.parse(fab, formatoEntrada);
+
+	    String dataFormatada = data.toString(); // yyyy-MM-dd
 
 	    // setar no bean
 	    JavaBeans produto = new JavaBeans();
 	    produto.setNome(nome);
-	    produto.setFabricacao(fab);
+	    produto.setFabricacao(dataFormatada);
 	    produto.setCategoria(categoriaEnum);
 	    produto.setFaixaE(faixaE);
 	    produto.setPreco(preco);
@@ -100,6 +107,9 @@ public class Controller extends HttpServlet {
 
 	    // redirecionar
 	    response.sendRedirect("main");
+	    
+	    System.out.println("ANTES: " + fab);
+	    System.out.println("DEPOIS: " + dataFormatada);
 	}
 	
 	protected void listarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,9 +122,16 @@ public class Controller extends HttpServlet {
 		System.out.println(contato.getFone());
 		System.out.println(contato.getEmail());*/
 		
+		LocalDate data = LocalDate.parse(produto.getFabricacao());
+		DateTimeFormatter formatoTela = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		String dataFormatada = data.format(formatoTela);
+
+		request.setAttribute("fab", dataFormatada);
+		
 		request.setAttribute("idcon", produto.getIdcon());
 		request.setAttribute("nome", produto.getNome());
-		request.setAttribute("fab", produto.getFabricacao());
+		//request.setAttribute("fab", produto.getFabricacao());
 		request.setAttribute("categoria", produto.getCategoria());
 		request.setAttribute("faixa", produto.getFaixaE());
 		request.setAttribute("preco", produto.getPreco());
@@ -128,13 +145,17 @@ public class Controller extends HttpServlet {
 		System.out.println(request.getParameter("fone"));
 		System.out.println(request.getParameter("email"));*/
 		
+		String fab = request.getParameter("fab");
+		
+
+		
 		produto.setNome(request.getParameter("nome"));
 	    produto.setFabricacao(request.getParameter("fab"));
 	    produto.setCategoria(request.getParameter("categoria"));
 	    produto.setFaixaE(request.getParameter("faixa"));
 	    produto.setPreco(request.getParameter("preco"));
 		
-		dao.alterarContato(produto);
+		dao.alterarProduto(produto);
 		response.sendRedirect("main");
 	}
 	

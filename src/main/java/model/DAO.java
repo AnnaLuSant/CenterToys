@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DAO {
@@ -79,11 +81,18 @@ public class DAO {
 		//Coloca as coisas dentro do banco, executando o "insert into"
 		try {
 			Connection con =conectar();
-			PreparedStatement pst =con.prepareStatement(create);	
+			PreparedStatement pst =con.prepareStatement(create);
+			
+			String fab = produto.getFabricacao();
+
+	        DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        LocalDate data = LocalDate.parse(fab, formatoEntrada);
+
+	        String dataFormatada = data.toString(); // yyyy-MM-dd
 			
 			//Substituir o (?,?,?)
 			pst.setString(1, produto.getNome());
-			pst.setString(2, produto.getFabricacao());
+			pst.setString(2, dataFormatada);
 			pst.setString(3, produto.getCategoria());
 			pst.setString(4, produto.getFaixaE());
 			pst.setString(5, produto.getPreco());
@@ -121,7 +130,7 @@ public class DAO {
 	}
 	
 	//Editar produto
-		public void alterarContato(JavaBeans produto) {
+		public void alterarProduto(JavaBeans produto) {
 			String create = "update brinquedos set nome =?, fone=?, email=? where idcon=?";
 			try {
 				Connection con = conectar();

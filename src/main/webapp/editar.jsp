@@ -99,9 +99,9 @@
 
 			<div class="mb-3">
 
-				<input type="text" name="preco" class="form-control" value="R$ 0.00"
+				<input type="text" name="preco" class="form-control"
 					oninput="this.value = (Number(this.value.replace(/\D/g, '')) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
-					required value="<%out.print(request.getAttribute("preco"));%>">
+					required value="R$ <%out.print(request.getAttribute("preco"));%>">
 
 			</div>
 

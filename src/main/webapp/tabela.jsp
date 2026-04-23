@@ -89,7 +89,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 							<td><%= lista.get(i).getFaixaE()%></td>
 							<td><%= lista.get(i).getPreco()%></td>
 
-							<td> <a href="select?idcon=<%= lista.get(i).getIdcon() %>" class="btn btn-primary"> Editar </a>
+							<td> <a href="select?idcon=<%= lista.get(i).getIdcon() %>" class="btn fw-bold w-100" id="botaoAmarelo"> Editar </a>
 								
 
 							<td><a href="javascript:confirmar(<%= lista.get(i).getIdcon() %>)" class="btn fw-bold w-100"
