@@ -49,9 +49,9 @@ public class Controller extends HttpServlet {
 			editarProduto(request,response);
 		}else if (action.equals("/delete")){
 			removerContato(request,response);
-		}else if (action.equals("/report")){
+		}/*else if (action.equals("/report")){
 			gerarRelatorio(request,response);
-		}
+		}*/
 		else {
 			response.sendRedirect("index.html");
 		}
@@ -75,13 +75,21 @@ public class Controller extends HttpServlet {
 			System.out.println(lista.get(i).getFaixaE());
 			System.out.println(lista.get(i).getPreco());
 		}*/
+		for (int i = 0; i < lista.size(); i++) {
+		System.out.println(lista.get(i).getFabricacao());
+		}
 	}
 	
 	protected void inserirProduto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
 	    // pegar dados do formulário
 	    String nome = request.getParameter("nome");
-	    String fab = request.getParameter("fab");
+	    
+	    //Data
+	    String dataTexto = request.getParameter("fab");
+	    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    LocalDate data = LocalDate.parse(dataTexto, formatoEntrada);
+		
 	    String categoriaStr = request.getParameter("categoria");
 	    String faixaE = request.getParameter("faixa");
 	    String preco = request.getParameter("preco");
@@ -89,15 +97,16 @@ public class Controller extends HttpServlet {
 	    //conversão categoria e data
 	    String categoriaEnum = String.valueOf(categoriaStr);
 	    
-	    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    
+	    /*DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    LocalDate data = LocalDate.parse(fab, formatoEntrada);
 
-	    String dataFormatada = data.toString(); // yyyy-MM-dd
+	    String dataFormatada = data.toString(); // yyyy-MM-dd*/
 
 	    // setar no bean
 	    JavaBeans produto = new JavaBeans();
 	    produto.setNome(nome);
-	    produto.setFabricacao(dataFormatada);
+	    produto.setFabricacao(data);
 	    produto.setCategoria(categoriaEnum);
 	    produto.setFaixaE(faixaE);
 	    produto.setPreco(preco);
@@ -108,8 +117,8 @@ public class Controller extends HttpServlet {
 	    // redirecionar
 	    response.sendRedirect("main");
 	    
-	    System.out.println("ANTES: " + fab);
-	    System.out.println("DEPOIS: " + dataFormatada);
+	    //System.out.println("ANTES: " + fab);
+	    System.out.println("DEPOIS: " + data);
 	}
 	
 	protected void listarContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -122,10 +131,12 @@ public class Controller extends HttpServlet {
 		System.out.println(contato.getFone());
 		System.out.println(contato.getEmail());*/
 		
-		LocalDate data = LocalDate.parse(produto.getFabricacao());
+		LocalDate data = produto.getFabricacao();
 		DateTimeFormatter formatoTela = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		String dataFormatada = data.format(formatoTela);
+
+		;
 
 		request.setAttribute("fab", dataFormatada);
 		
@@ -145,12 +156,14 @@ public class Controller extends HttpServlet {
 		System.out.println(request.getParameter("fone"));
 		System.out.println(request.getParameter("email"));*/
 		
-		String fab = request.getParameter("fab");
-		
+		String dataTexto = request.getParameter("fab");
+
+		DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate data = LocalDate.parse(dataTexto, formatoEntrada);
 
 		
 		produto.setNome(request.getParameter("nome"));
-	    produto.setFabricacao(request.getParameter("fab"));
+		produto.setFabricacao(data);
 	    produto.setCategoria(request.getParameter("categoria"));
 	    produto.setFaixaE(request.getParameter("faixa"));
 	    produto.setPreco(request.getParameter("preco"));

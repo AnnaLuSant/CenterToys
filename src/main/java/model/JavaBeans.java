@@ -1,9 +1,11 @@
 package model;
 
+import java.time.LocalDate;
+
 public class JavaBeans {
 	private String idcon;
 	private String nome;
-	private String fabricacao;
+	private LocalDate fabricacao;
 	private String categoria;
 	private String faixaE;
 	private String preco;
@@ -12,7 +14,7 @@ public class JavaBeans {
 		super();
 	}
 	
-	public JavaBeans(String idcon,String nome,String fabricacao,String categoria,String faixaE,String preco) {
+	public JavaBeans(String idcon,String nome,LocalDate fabricacao,String categoria,String faixaE,String preco) {
 		super();
 		this.idcon = idcon;
 		this.nome = nome;
@@ -34,11 +36,11 @@ public class JavaBeans {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getFabricacao() {
+	public LocalDate getFabricacao() {
 		return fabricacao;
 	}
-	public void setFabricacao(String fabricacao) {
-		this.fabricacao = fabricacao;
+	public void setFabricacao(LocalDate date) {
+		this.fabricacao = date;
 	}
 	public String getCategoria() {
 		return categoria;
@@ -58,6 +60,7 @@ public class JavaBeans {
 	public void setPreco(String preco) {
 		this.preco = preco;
 	}
+
 	
 
 }

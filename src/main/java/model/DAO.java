@@ -44,7 +44,7 @@ public class DAO {
 	public ArrayList<JavaBeans> listarProdutos() {
 		ArrayList<JavaBeans> produtos=new ArrayList<>();
 		
-		String read ="select * from brinquedos order by nome";
+		String read ="select * from brinquedos order by idcon";
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(read);
@@ -52,7 +52,7 @@ public class DAO {
 			while (rs.next()) {
 				String idcon =rs.getString(1);
 				String nome = rs.getString(2);
-				String fabricacao =rs.getString(3);
+				LocalDate fabricacao = rs.getDate(3).toLocalDate();
 				String categoria = rs.getString(4);
 				String faixaE = rs.getString(5);
 				String preco = rs.getString(6);
@@ -83,16 +83,16 @@ public class DAO {
 			Connection con =conectar();
 			PreparedStatement pst =con.prepareStatement(create);
 			
-			String fab = produto.getFabricacao();
+			/*String fab = produto.getFabricacao();
 
 	        DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        LocalDate data = LocalDate.parse(fab, formatoEntrada);
 
-	        String dataFormatada = data.toString(); // yyyy-MM-dd
+	        String dataFormatada = data.toString(); // yyyy-MM-dd*/
 			
 			//Substituir o (?,?,?)
 			pst.setString(1, produto.getNome());
-			pst.setString(2, dataFormatada);
+			pst.setDate(2, java.sql.Date.valueOf(produto.getFabricacao()));
 			pst.setString(3, produto.getCategoria());
 			pst.setString(4, produto.getFaixaE());
 			pst.setString(5, produto.getPreco());
@@ -118,7 +118,7 @@ public class DAO {
 					while (rs.next()) {
 						produto.setIdcon(rs.getString(1));
 						produto.setNome(rs.getString(2));
-						produto.setFabricacao(rs.getString(3));
+						produto.setFabricacao(rs.getDate(3).toLocalDate());
 						produto.setCategoria(rs.getString(4));
 						produto.setFaixaE(rs.getString(5));
 						produto.setPreco(rs.getString(6));
@@ -131,12 +131,12 @@ public class DAO {
 	
 	//Editar produto
 		public void alterarProduto(JavaBeans produto) {
-			String create = "update brinquedos set nome =?, fone=?, email=? where idcon=?";
+			String update = "update brinquedos set nome=?, fabricacao=?, categoria=?, faixa_etaria=?, preco=? where idcon=?";
 			try {
 				Connection con = conectar();
-				PreparedStatement pst = con.prepareStatement(create);				
+				PreparedStatement pst = con.prepareStatement(update);				
 				pst.setString(1, produto.getNome());
-				pst.setString(2, produto.getFabricacao());
+				pst.setDate(2, java.sql.Date.valueOf(produto.getFabricacao()));
 				pst.setString(3, produto.getCategoria());
 				pst.setString(4, produto.getFaixaE());
 				pst.setString(5, produto.getPreco());

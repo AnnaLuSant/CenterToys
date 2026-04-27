@@ -1,3 +1,5 @@
+
+
 function validar() {
 	let nome = frmProduto.nome.value
 	let fab = frmProduto.fab.value
@@ -6,12 +8,21 @@ function validar() {
 	let preco = frmProduto.preco.value
 	let precoCampo = frmProduto.preco;
 	let faixaCampo = frmProduto.faixa;
+	let fabCampo =frmProduto.fab;
+	
+	
+	let fabLimpo = fabCampo.value.replace('/', '-');
+		
+	fabCampo.value = fabLimpo;
+	
 
 	let precoLimpo = precoCampo.value.replace(/[R$\s.]/g, '').replace(',', '.');
 	precoCampo.value = precoLimpo;
 
 	let faixaLimpa = faixaCampo.value.replace(/\D/g, '');
 	faixaCampo.value = faixaLimpa;
+	
+	
 
 	if (nome === "") {
 		alert("Preencha o campo nome")
@@ -38,3 +49,4 @@ function validar() {
 	
 	
 }
+
