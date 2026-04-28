@@ -84,11 +84,13 @@ public class Controller extends HttpServlet {
 	    
 	    // pegar dados do formulário
 	    String nome = request.getParameter("nome");
-	    
+	    String fab = request.getParameter("fab");
+	    System.out.println(fab+" ###############");
 	    //Data
-	    String dataTexto = request.getParameter("fab");
-	    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    LocalDate data = LocalDate.parse(dataTexto, formatoEntrada);
+	    /*String dataTexto = request.getParameter("fab");
+
+	    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+	    LocalDate data = LocalDate.parse(dataTexto, formatoEntrada);*/
 		
 	    String categoriaStr = request.getParameter("categoria");
 	    String faixaE = request.getParameter("faixa");
@@ -106,7 +108,7 @@ public class Controller extends HttpServlet {
 	    // setar no bean
 	    JavaBeans produto = new JavaBeans();
 	    produto.setNome(nome);
-	    produto.setFabricacao(data);
+	    produto.setFabricacao(fab);
 	    produto.setCategoria(categoriaEnum);
 	    produto.setFaixaE(faixaE);
 	    produto.setPreco(preco);

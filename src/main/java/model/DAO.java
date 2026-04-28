@@ -76,6 +76,7 @@ public class DAO {
 	}
 	
 	public void inserirProduto(JavaBeans produto) {
+		
 		String create ="insert into brinquedos(nome,fabricacao,categoria,faixa_etaria,preco) values (?,?,?,?,?)";
 		
 		//Coloca as coisas dentro do banco, executando o "insert into"
