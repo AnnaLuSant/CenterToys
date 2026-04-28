@@ -1,11 +1,8 @@
-/**
- * Confirmação de excluxão de um contato
- */
-
-function confirmar(idcon){
-	let resposta = confirm("Confirmar a exclusão deste contato?")
+function confirmar(idcon) {
+    //console.log(idcon); // <-- verifica se vem valor
+    let resposta = confirm("Confirma a exclusão deste produto?");
 	
-	if (resposta === true){
-		window.location.href = "delete?idcon=" + idcon
-	}
+    if (resposta === true) {
+        window.location.href = "delete?idcon=" + idcon
+    }
 }

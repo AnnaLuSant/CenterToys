@@ -52,7 +52,7 @@ public class DAO {
 			while (rs.next()) {
 				String idcon =rs.getString(1);
 				String nome = rs.getString(2);
-				LocalDate fabricacao = rs.getDate(3).toLocalDate();
+				String fabricacao = rs.getString(3);
 				String categoria = rs.getString(4);
 				String faixaE = rs.getString(5);
 				String preco = rs.getString(6);
@@ -119,7 +119,7 @@ public class DAO {
 					while (rs.next()) {
 						produto.setIdcon(rs.getString(1));
 						produto.setNome(rs.getString(2));
-						produto.setFabricacao(rs.getDate(3).toLocalDate());
+						produto.setFabricacao(rs.getString(3));
 						produto.setCategoria(rs.getString(4));
 						produto.setFaixaE(rs.getString(5));
 						produto.setPreco(rs.getString(6));
@@ -150,20 +150,8 @@ public class DAO {
 					
 		}
 		
-	//Deletar produto
-		public void deletarProduto(JavaBeans contato) {
-			String delete = "delete from brinquedos where idcon =?";
-			try {
-				Connection con = conectar();
-				PreparedStatement pst = con.prepareStatement(delete);
-				pst.setString(1, contato.getIdcon());
-				pst.executeUpdate();
-				con.close();
-				
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
+		
+		
 
 	
 }

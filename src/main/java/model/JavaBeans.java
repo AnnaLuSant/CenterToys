@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class JavaBeans {
 	private String idcon;
 	private String nome;
-	private LocalDate fabricacao;
+	private String fabricacao;
 	private String categoria;
 	private String faixaE;
 	private String preco;
@@ -14,7 +14,7 @@ public class JavaBeans {
 		super();
 	}
 	
-	public JavaBeans(String idcon,String nome,LocalDate fabricacao,String categoria,String faixaE,String preco) {
+	public JavaBeans(String idcon,String nome,String fabricacao,String categoria,String faixaE,String preco) {
 		super();
 		this.idcon = idcon;
 		this.nome = nome;
@@ -36,11 +36,11 @@ public class JavaBeans {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public LocalDate getFabricacao() {
+	public String getFabricacao() {
 		return fabricacao;
 	}
-	public void setFabricacao(LocalDate date) {
-		this.fabricacao = date;
+	public void setFabricacao(String fab) {
+		this.fabricacao = fab;
 	}
 	public String getCategoria() {
 		return categoria;

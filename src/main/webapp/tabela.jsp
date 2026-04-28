@@ -92,7 +92,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 							<td> <a href="select?idcon=<%= lista.get(i).getIdcon() %>" class="btn fw-bold w-100" id="botaoAmarelo"> Editar </a>
 								
 
-							<td><a href="javascript:confirmar(<%= lista.get(i).getIdcon() %>)" class="btn fw-bold w-100"
+						 <td><a href="javascript:confirmar(<%= lista.get(i).getIdcon() %>)" class="btn fw-bold w-100"
 								id="botaoVermelho"> Excluir </a></td>
 
 						</tr>
@@ -118,9 +118,8 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 
 	</div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="scripts/confirmar.js"></script>
 </body>
 
 </html>
