@@ -1,10 +1,19 @@
 package controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+//import com.itextpdf.text.Document; 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +26,7 @@ import model.JavaBeans;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet({ "/main", "/insert", "/select", "/update","/delete" })
+@WebServlet({ "/main", "/insert", "/select", "/update", "/delete", "/report"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();// Teste com o Banco
@@ -49,10 +58,10 @@ public class Controller extends HttpServlet {
 		} else if (action.equals("/update")) {
 			editarProduto(request, response);
 		} else if (action.equals("/delete")) {
-			removerProduto(request, response);
-		} /*
-			 * else if (action.equals("/report")){ gerarRelatorio(request,response); }
-			 */
+			removerProduto(request,response);
+		} else if (action.equals("/report")) {
+			gerarRelatorio(request,response);
+		}
 		else {
 			response.sendRedirect("index.html");
 		}
@@ -60,7 +69,7 @@ public class Controller extends HttpServlet {
 
 	protected void produtos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// response.sendRedirect("agenda.jsp");
+		// response.sendRedirect("tabela.jsp");
 		ArrayList<JavaBeans> lista = dao.listarProdutos();
 
 		request.setAttribute("produtos", lista);
@@ -186,23 +195,82 @@ public class Controller extends HttpServlet {
 	}
 
 	// Deletar
-	protected void removerProduto(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void removerProduto(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String idcon = request.getParameter("idcon");
-		System.out.println("/delete");
-		produto.setIdcon(idcon); 
-		  /*dao.deletarProduto(produto);
-		  response.sendRedirect("main");*/
+		System.out.println(idcon);
+		
+		produto.setIdcon(idcon);
+		dao.deletarProduto(produto);
+		response.sendRedirect("main");
 		 
 	}
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	//Gerar Relatório PDF
+			protected void gerarRelatorio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				Document documento = new Document();
+				
+				try {
+					response.setContentType("aplication/pdf");
+					response.addHeader("Content-Disposition", "inline; filemane=" + "center_toys.pdf");
+					
+					PdfWriter.getInstance(documento, response.getOutputStream());
+					// 🔽 AQUI entra a imagem
+					String caminhoImagem = getServletContext().getRealPath("/img/logo.png");
+					Image imagem = Image.getInstance(caminhoImagem);
+
+					// ajustar tamanho
+					imagem.scaleToFit(120, 120);
+					imagem.setAlignment(Element.ALIGN_CENTER);
+
+					// adiciona no PDF
+					
+					documento.open();
+					documento.add(new Paragraph(" "));
+					
+					PdfPTable tabela = new PdfPTable(5);
+					
+					Font fonteCabecalho = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
+					BaseColor corFundo = new BaseColor(0, 102, 204);
+					 
+					PdfPCell col1 = new PdfPCell(new Paragraph("Nome", fonteCabecalho));
+					PdfPCell col2 = new PdfPCell(new Paragraph("Data da fabricação", fonteCabecalho));
+					PdfPCell col3 = new PdfPCell(new Paragraph("Categoria", fonteCabecalho));
+					PdfPCell col4 = new PdfPCell(new Paragraph("Faixa Etaria", fonteCabecalho));
+					PdfPCell col5 = new PdfPCell(new Paragraph("Preço", fonteCabecalho));
+					
+					
+					/*tabela.addCell(col1);
+					tabela.addCell(col2);
+					tabela.addCell(col3);
+					tabela.addCell(col4);
+					tabela.addCell(col5);*/
+					PdfPCell[] colunas = {col1, col2, col3, col4, col5};
+
+			        for (PdfPCell col : colunas) {
+			            col.setBackgroundColor(corFundo);
+			            col.setHorizontalAlignment(Element.ALIGN_CENTER);
+			            col.setPadding(5);
+			            tabela.addCell(col);
+			        }
+					
+					ArrayList<JavaBeans> lista = dao.listarProdutos();
+					for(int i = 0; i < lista.size(); i++) {
+						tabela.addCell(lista.get(i).getNome());
+						tabela.addCell(lista.get(i).getFabricacao());
+						tabela.addCell(lista.get(i).getCategoria());
+						tabela.addCell(lista.get(i).getFaixaE());
+						tabela.addCell(lista.get(i).getPreco());
+					}
+					
+					documento.add(imagem);
+					documento.add(tabela);	
+					documento.close();
+					
+				} catch (Exception e) {
+					System.out.println(e);
+					documento.close();				
+				}
+			}
 	}
-
-}

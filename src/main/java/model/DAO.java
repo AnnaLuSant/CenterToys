@@ -70,7 +70,7 @@ public class DAO {
 		}
 		
 		
-		/*CRUF UPDATE*/
+		/*CRUD UPDATE*/
 		
 		
 	}
@@ -150,8 +150,22 @@ public class DAO {
 					
 		}
 		
+		public void deletarProduto(JavaBeans produto) {
+			String delete = "delete from brinquedos where idcon=?";
+			try {
+				Connection con = conectar();
+				PreparedStatement pst = con.prepareStatement(delete);
+				pst.setString(1, produto.getIdcon());
+				pst.executeUpdate();
+				con.close();
+				
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}		
+	}
+		
 		
 		
 
-	
-}
+

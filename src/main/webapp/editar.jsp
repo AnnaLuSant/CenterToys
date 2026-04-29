@@ -46,7 +46,7 @@
 		<form class="row mb-3 w-50 mx-auto" name="frmProduto" action="insert">
 
 			<div class="mb-3">
-				<input type="text" class="form-control" name="idcon" readonly
+				<input type="text" id="idcon" class="form-control" name="idcon" readonly
 					value="<%out.print(request.getAttribute("idcon"));%>">
 			</div>
 

@@ -1,6 +1,6 @@
-<%@page import="model.JavaBeans"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="model.JavaBeans"%>
 <%@ page import="java.util.ArrayList"%>
 <%
 ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produtos");
@@ -29,7 +29,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 	rel="stylesheet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
 	rel="stylesheet">
@@ -112,7 +112,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 			<a type="button" class="btn px-4 py-2 fw-bold custom-btn"
 				id="botaoAzul" href="cadastro.html"> Cadastrar produto </a> <a
 				type="button" class="btn px-4 py-2 fw-bold custom-btn"
-				id="botaoVerde" href="#"> Baixar relatório </a>
+				id="botaoVerde" href="report"> Baixar relatório </a>
 
 		</footer>
 
