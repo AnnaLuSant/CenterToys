@@ -47,7 +47,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("produt
 		<header
 			class="d-flex flex-column flex-md-row align-items-center justify-content-center mb-4 gap-md-4">
 
-			<img id="logo" src="img/logo_personagem.png" alt="Logo Center Toys"
+			<img id="logo" src="img/logo.png" alt="Logo Center Toys"
 				class="img-fluid">
 			<h1 class="fw-bold titulo-pagina mb-0">Produtos</h1>
 

@@ -46,13 +46,13 @@
 		<form class="row mb-3 w-50 mx-auto" name="frmProduto" action="insert">
 
 			<div class="mb-3">
-				<input type="text" id="idcon" class="form-control" name="idcon" readonly
+				<input type="text" id="idcon" class="form-control border-tabela" name="idcon" readonly
 					value="<%out.print(request.getAttribute("idcon"));%>">
 			</div>
 
 			<div class="mb-3">
 
-				<input type="text" name="nome" class="form-control"
+				<input type="text" name="nome" class="form-control border-tabela"
 					placeholder="Nome do Produto:" maxlength="50" required
 					value="<%out.print(request.getAttribute("nome"));%>">
 
@@ -61,7 +61,7 @@
 
 			<div class="mb-3">
 
-				<input type="text" name="fab" class="form-control"
+				<input type="text" name="fab" class="form-control border-tabela"
 					placeholder="Data de Fabricação:" maxlength="10"
 					oninput="let v=this.value.replace(/\D/g,''); if(v.length>2) v=v.slice(0,2)+'/'+v.slice(2); if(v.length>5) v=v.slice(0,5)+'/'+v.slice(5,9); this.value=v;"
 					required value="<%out.print(request.getAttribute("fab"));%>">
@@ -70,7 +70,7 @@
 
 			<div class="mb-3">
 
-				<select id="inputState" class="form-select" name="categoria">
+				<select id="inputState" class="form-select border-tabela" name="categoria">
 				<%String categoria = (String) request.getAttribute("categoria");%>
 
 					<option value="" selected disabled>Selecione uma categoria</option>
@@ -88,7 +88,7 @@
 
 			<div class="mb-3">
 
-				<input type="text" name="faixa" class="form-control"
+				<input type="text" name="faixa" class="form-control border-tabela"
 					placeholder="Faixa Etária: (Ex: 5)"
 					onfocus="this.value = this.value.replace(' anos', '')"
 					onblur="if(this.value && !this.value.includes(' anos')) this.value += ' anos'"
@@ -99,7 +99,7 @@
 
 			<div class="mb-3">
 
-				<input type="text" name="preco" class="form-control"
+				<input type="text" name="preco" class="form-control border-tabela"
 					oninput="this.value = (Number(this.value.replace(/\D/g, '')) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
 					required value="R$ <%out.print(request.getAttribute("preco"));%>">
 

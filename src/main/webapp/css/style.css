@@ -19,7 +19,7 @@
 
 #logo {
 
-    max-width: 300px; /* Limita o tamanho da logo em telas grandes, mas mantém responsivo */
+    max-width: 300px;
     height: auto;
 
 }
@@ -28,23 +28,22 @@
 
     color: var(--azure);
     font-family: "Fredoka";
+    text-align: center;
 
 }
 
-.txt-index{
+.txt-index {
 
     color: var(--vermelho);
 
 }
 
-/* Estilo do container da tabela para destacar do fundo */
-.border-tabela {
+.bordas {
 
     border: 2px solid var(--amarelo);
 
 }
 
-/* Força a fonte na tabela do Bootstrap */
 .table {
 
     font-family: "Fredoka", sans-serif;
@@ -58,103 +57,131 @@
 
 }
 
-@media (max-width: 767px) {
+/* --- RESPONSIVIDADE --- */
+
+/* SMARTPHONE PORTRAIT */
+@media (max-width: 575px) {
 
     #logo {
 
+        max-width: 150px;
         margin-bottom: 1rem;
 
     }
-
-}
-
-/* Desktop: Logo e Título lado a lado perfeitamente alinhados */
-@media (min-width: 768px) {
-
-    #logo {
-
-        max-width: 200px;
-        margin-bottom: 0;
-        margin-right: 200px;
-
-    }
-
-    #logo-index {
-
-        max-width: 200px;
-        margin-bottom: 0;
-
-    }
-    
     .titulo-pagina {
 
-        display: flex;
-        align-items: center;
-        line-height: 1;
-        font-size: 3.5rem;
+        font-size: 2.2rem;
 
     }
 
     .titulo-pagina-index {
 
+        font-size: 3rem;
         color: var(--azure);
-        align-items: center;
-        line-height: 1;
-        font-size: 4rem;
-        margin-top: 20px;
-        text-align: center;
 
     }
 
 }
 
-/* Efeito de hover suave para todos os botões */
+/* TABLET (PORTRAIT & LANDSCAPE) & SMARTPHONE LANDSCAPE */
+@media (min-width: 576px) and (max-width: 1199px) {
+    
+    #logo {
+
+        max-width: 180px; 
+        margin-bottom: 0;
+
+    }
+    .titulo-pagina {
+
+        font-size: 2.8rem;
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        margin-left: 100px;
+
+    }
+
+    .titulo-pagina-index {
+
+        font-size: 3rem;
+        color: var(--azure);
+
+    }
+
+}
+
+/* DESKTOP */
+@media (min-width: 1200px) {
+
+    #logo {
+
+        max-width: 230px;
+        margin-bottom: 0;
+
+    }
+
+    .titulo-pagina {
+
+        font-size: 4rem;
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        margin-left: 100px;
+
+    }
+
+    .titulo-pagina-index {
+
+        font-size: 3rem;
+        color: var(--azure);
+
+    }
+
+}
+
+/* BUTTONS */
 .btn {
-
     transition: transform 0.2s ease, filter 0.2s ease;
-
 }
 
 .btn:hover {
-
     transform: scale(1.03);
     filter: brightness(0.95);
+}
+
+#botaoAzul { 
+    
+    background-color: var(--azure); 
+    color: var(--branco); 
+    font-size: 1rem; 
+    border: none; 
 
 }
 
-/* Identificadores dos Botões */
-#botaoAzul {
-
-    background-color: var(--azure);
-    color: var(--branco);
-    font-size: 1rem;
-    border: none;
-
-}
-
-#botaoAmarelo {
-
-    background-color: var(--amarelo);
-    color: var(--azure);
-    font-size: 1rem;
-    border: none;
+#botaoAmarelo { 
+    
+    background-color: var(--amarelo); 
+    color: var(--azure); 
+    font-size: 1rem; 
+    border: none; 
 
 }
 
-#botaoVermelho {
-
-    background-color: var(--vermelho);
-    color: var(--amarelo);
-    font-size: 1rem;
-    border: none;
+#botaoVermelho { 
+    
+    background-color: var(--vermelho); 
+    color: var(--amarelo); 
+    font-size: 1rem; 
+    border: none; 
 
 }
 
-#botaoVerde {
-
-    background-color: var(--verde);
-    color: var(--amarelo);
-    font-size: 1rem;
-    border: none;
+#botaoVerde { 
+    
+    background-color: var(--verde); 
+    color: var(--amarelo); 
+    font-size: 1rem; 
+    border: none; 
 
 }
